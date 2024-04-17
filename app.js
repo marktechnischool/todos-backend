@@ -50,7 +50,7 @@ app.post('/todos', async (req, resp) => {
 app.put('/todos/:id', async (req, resp) => {
     try {
         const student = await Note.findByIdAndUpdate(req.params.id, req.body, { new: true })
-        resp.status(201).json(student)
+        resp.status(200).json(student)
     } catch (error) {
         resp.status(400).json({ message: error.message })
     }
@@ -58,8 +58,8 @@ app.put('/todos/:id', async (req, resp) => {
 
 app.delete('/todos/:id', async (req, resp) => {
     try {
-        const student = await Note.findByIdAndDelete(req.params.id)
-        resp.status(201)
+        await Note.findByIdAndDelete(req.params.id)
+        resp.status(204).send()
     } catch (error) {
         resp.status(400).json({ message: error.message })
     }
